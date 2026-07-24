@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVD STUDIO — Landing Pages premium para profissionais</title>
+<meta name="description" content="Substitua seu LinkTree por uma landing page exclusiva. Design premium, rápido e feito para transformar visitantes em clientes.">
+<link rel="icon" href="imagens/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --bg: #0a0a0c;
+  --surface: #131316;
+  --surface-2: #1a1a1e;
+  --line: rgba(237,234,227,0.09);
+  --text: #edeae3;
+  --text-muted: #96938a;
+  --text-faint: #5f5d57;
+  --accent: #c9a66b;
+  --accent-soft: rgba(201,166,107,0.14);
+  --accent-2: #3e7c6f;
+  --danger: #a9695c;
+
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Inter', sans-serif;
+
+  --container: 1180px;
+  --space-section: clamp(5rem, 11vw, 9rem);
+  --radius: 18px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+*,*::before,*::after{ box-sizing: border-box; }
+html{ background: var(--bg); scroll-behavior: smooth; }
+html.lock, html.lock body{ overflow: hidden; height: 100%; }
+
+body{
+  margin:0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family: inherit; cursor:pointer; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,p{ margin:0; }
+
+.container{
+  width:100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+}
+
+:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+body::before{
+  content:"";
+  position: fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,166,107,0.08), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 110%, rgba(62,124,111,0.06), transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ============================================================
+   TIPOGRAFIA
+   ============================================================ */
+.eyebrow{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  font-family: var(--font-body);
+  font-size: .78rem;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+}
+.eyebrow::before{
+  content:"";
+  width: 22px; height:1px;
+  background: var(--accent);
+}
+
+h2.heading{
+  font-family: var(--font-display);
+  font-weight:500;
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  line-height:1.12;
+  letter-spacing:-0.01em;
+  max-width: 18ch;
+  color: var(--text);
+}
+h2.heading em{
+  font-style: italic;
+  font-weight:400;
+  color: var(--accent);
+}
+
+.lede{
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 46ch;
+  margin-top: 1.1rem;
+}
+
+.section-head{
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+/* ============================================================
+   BOTÕES
+   ============================================================ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.6rem;
+  padding: .95rem 1.9rem;
+  border-radius: 999px;
+  font-size: .95rem;
+  font-weight:600;
+  border: 1px solid transparent;
+  transition: transform .35s var(--ease), background .3s ease, border-color .3s ease, color .3s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background: var(--accent);
+  color: #14120c;
+}
+.btn-primary:hover{ transform: translateY(-2px); background:#d8b57e; }
+.btn-ghost{
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text);
+}
+.btn-ghost:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+.btn svg{ width:16px; height:16px; }
+
+/* ============================================================
+   INTRO / TELA DE APRESENTAÇÃO COM DIGITAÇÃO
+   ============================================================ */
+#intro{
+  position: fixed;
+  inset:0;
+  z-index: 1000;
+  background: var(--bg);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap: clamp(.5rem, 2.5vh, 1.25rem);
+  padding: clamp(1.25rem, 4vh, 2rem) 2rem;
+  overflow-y: auto;
+  transition: opacity .9s var(--ease), visibility .9s var(--ease);
+}
+#intro::before{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(201,166,107,0.10), transparent 65%);
+  pointer-events:none;
+}
+#intro.is-hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.intro-stage{
+  position:relative;
+  min-height: 100px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink: 0;
+}
+
+.intro-typing{
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  white-space: nowrap;
+  display: inline-block;
+}
+.intro-typing span{
+  color: var(--accent);
+}
+.intro-typing::after{
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 0.85em;
+  background-color: var(--accent);
+  margin-left: 6px;
+  vertical-align: -0.05em;
+  animation: cursor-blink 0.8s infinite;
+}
+@keyframes cursor-blink{
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.intro-typing.done::after{
+  display: none;
+}
+
+.intro-copy{
+  text-align:center;
+  max-width: 620px;
+  flex-shrink: 0;
+  opacity:0;
+  transform: translateY(14px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.intro-copy.is-visible{ opacity:1; transform:translateY(0); }
+
+.intro-copy h1{
+  font-family: var(--font-display);
+  font-weight:500;
+  font-size: clamp(1.15rem, 2.6vh + .6vw, 2.1rem);
+  line-height:1.28;
+  letter-spacing:-0.01em;
+}
+.intro-copy .btn{ margin-top: clamp(.9rem, 3vh, 2rem); }
+
+.intro-skip{
+  position:absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background:none;
+  border:none;
+  color: var(--text-faint);
+  font-size: .82rem;
+  letter-spacing:.04em;
+  padding:.5rem;
+  transition: color .3s ease;
+}
+.intro-skip:hover{ color: var(--text-muted); }
+
+.intro-mark{
+  position:absolute;
+  top: 2rem; left:2rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-faint);
+}
+
+/* ============================================================
+   NAVBAR — LIQUID GLASS (ESTILO APPLE)
+   ============================================================ */
+header#site-nav{
+  position: fixed;
+  top: 1rem; left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, var(--container));
+  z-index: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(16, 16, 20, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s var(--ease);
+}
+
+/* Comportamento ao rolar a página */
+header#site-nav.scrolled{
+  top: 0.75rem;
+  background: rgba(10, 10, 14, 0.75);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-color: rgba(201, 166, 107, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.nav-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight:600;
+  letter-spacing:-0.01em;
+}
+.logo span{ color: var(--accent); }
+
+nav.nav-links{
+  display:flex;
+  align-items:center;
+  gap: 1.8rem;
+}
+nav.nav-links a{
+  font-size:.88rem;
+  color: var(--text-muted);
+  transition: color .3s ease;
+  position:relative;
+}
+nav.nav-links a:hover{ color: var(--text); }
+
+.nav-cta{ display:flex; align-items:center; gap:1.2rem; }
+.nav-cta .btn{ padding: .55rem 1.2rem; font-size:.82rem; }
+
+.nav-toggle{
+  display:none;
+  background:none; border:none;
+  width: 26px; height:20px;
+  position:relative;
+}
+.nav-toggle span, .nav-toggle::before, .nav-toggle::after{
+  content:"";
+  position:absolute; left:0; right:0;
+  height:1.5px; background: var(--text);
+  transition: transform .35s ease, opacity .35s ease, top .35s ease;
+}
+.nav-toggle::before{ top:0; }
+.nav-toggle span{ top:9px; }
+.nav-toggle::after{ top:18px; }
+.nav-toggle.is-open::before{ top:9px; transform: rotate(45deg); }
+.nav-toggle.is-open span{ opacity:0; }
+.nav-toggle.is-open::after{ top:9px; transform: rotate(-45deg); }
+
+/* ============================================================
+   LAYOUT GERAL DE SEÇÃO
+   ============================================================ */
+main{ position:relative; z-index:1; }
+section{
+  padding: var(--space-section) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+[data-reveal]{
+  opacity:0;
+  transform: translateY(26px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+}
+[data-reveal].is-visible{ opacity:1; transform:translateY(0); }
+[data-reveal-delay="1"]{ transition-delay:.12s; }
+[data-reveal-delay="2"]{ transition-delay:.24s; }
+[data-reveal-delay="3"]{ transition-delay:.36s; }
+[data-reveal-delay="4"]{ transition-delay:.48s; }
+[data-reveal-delay="5"]{ transition-delay:.6s; }
+
+/* ============================================================
+   SOBRE
+   ============================================================ */
+#sobre .grid{
+  display:grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items:center;
+}
+.portrait-frame{
+  position:relative;
+  border-radius: var(--radius);
+  overflow:hidden;
+  aspect-ratio: 4/5;
+  background: var(--surface);
+}
+.portrait-frame img{
+  width:100%; height:100%; object-fit:cover;
+  filter: grayscale(45%) contrast(1.02);
+  transition: filter .5s ease;
+}
+.portrait-frame:hover img{ filter:grayscale(0%); }
+.portrait-frame::after{
+  content:"";
+  position:absolute; inset:0;
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius);
+  outline: 10px solid var(--bg);
+  outline-offset: -10px;
+}
+
+.about-list{
+  margin-top: 2.2rem;
+  display:flex;
+  flex-direction:column;
+  gap: .9rem;
+}
+.about-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:.8rem;
+  color: var(--text-muted);
+  font-size:.96rem;
+}
+.about-list svg{ flex-shrink:0; width:16px; height:16px; margin-top:.3rem; color: var(--accent); }
+
+/* ============================================================
+   PROBLEMA VS SOLUÇÃO
+   ============================================================ */
+.compare-wrap{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+}
+.compare-divider{
+  position:absolute;
+  left:50%; top:50%;
+  transform: translate(-50%,-50%);
+  width:56px; height:56px;
+  border-radius:50%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  z-index:2;
+  color: var(--accent);
+}
+.compare-divider svg{ width:20px; height:20px; }
+
+.compare-card{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem,3vw,2.2rem);
+}
+.compare-card .tag{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding: .35rem .75rem;
+  border-radius:999px;
+  margin-bottom: 1.3rem;
+}
+.compare-card.problem .tag{ background: rgba(169,105,92,0.15); color:#c98d7f; }
+.compare-card.solution .tag{ background: var(--accent-soft); color: var(--accent); }
+
+.mockup{
+  border-radius: 10px;
+  overflow:hidden;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  margin-bottom: 1.6rem;
+}
+.mockup-bar{
+  display:flex; gap:6px;
+  padding: .65rem .8rem;
+  border-bottom:1px solid var(--line);
+}
+.mockup-bar span{ width:8px; height:8px; border-radius:50%; background: var(--text-faint); }
+.mockup img{ width:100%; display:block; }
+.compare-card.problem .mockup img{ filter: grayscale(70%) brightness(.85); }
+
+.compare-card h3{
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight:500;
+  margin-bottom: 1rem;
+}
+.compare-card ul{ display:flex; flex-direction:column; gap:.7rem; }
+.compare-card li{
+  display:flex; gap:.7rem;
+  font-size:.92rem;
+  color: var(--text-muted);
+  align-items:flex-start;
+}
+.compare-card li svg{ width:15px; height:15px; margin-top:.25rem; flex-shrink:0; }
+.compare-card.problem li svg{ color:#c98d7f; }
+.compare-card.solution li svg{ color: var(--accent); }
+
+/* ============================================================
+   CTA BAND
+   ============================================================ */
+#cta-direto{
+  text-align:center;
+  background: var(--surface);
+}
+#cta-direto .heading{ max-width: 22ch; margin: 0 auto; }
+#cta-direto .lede{ margin-left:auto; margin-right:auto; }
+#cta-direto .btn{ margin-top: 2.2rem; }
+
+/* ============================================================
+   PORTFÓLIO
+   ============================================================ */
+.portfolio-carousel{ position:relative; }
+.portfolio-track{
+  display:flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: .25rem .25rem 1rem;
+  margin: -.25rem -.25rem 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.portfolio-track::-webkit-scrollbar{ display:none; }
+.portfolio-item{
+  flex: 0 0 clamp(240px, 27vw, 320px);
+  scroll-snap-align: start;
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  position:relative;
+  transition: transform .5s var(--ease), border-color .5s ease;
+}
+.portfolio-item:hover{ transform: translateY(-6px); border-color: var(--accent-soft); }
+.portfolio-thumb{ aspect-ratio: 4/3; overflow:hidden; }
+.portfolio-thumb img{
+  width:100%; height:100%; object-fit:cover;
+  transition: transform .6s var(--ease);
+}
+.portfolio-item:hover .portfolio-thumb img{ transform: scale(1.06); }
+.portfolio-info{
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 1.1rem 1.3rem;
+}
+.portfolio-info .name{ font-size:.94rem; font-weight:600; }
+.portfolio-info .role{ display:block; font-size:.8rem; color: var(--text-muted); margin-top:.15rem; }
+.portfolio-info svg{ width:16px; height:16px; color: var(--text-faint); transition: transform .4s ease, color .4s ease; }
+.portfolio-item:hover .portfolio-info svg{ transform: translate(3px,-3px); color: var(--accent); }
+
+.carousel-controls{
+  display:flex;
+  align-items:center;
+  gap: .9rem;
+  margin-top: 1.6rem;
+}
+.carousel-btn{
+  width: 44px; height:44px;
+  border-radius:50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  display:flex; align-items:center; justify-content:center;
+  transition: border-color .3s ease, color .3s ease, transform .3s var(--ease);
+}
+.carousel-btn:hover{ border-color: var(--accent); color: var(--accent); }
+.carousel-btn:active{ transform: scale(.94); }
+.carousel-btn:disabled{ opacity:.35; pointer-events:none; }
+.carousel-btn svg{ width:18px; height:18px; }
+
+/* ============================================================
+   FLUXO DE TRABALHO
+   ============================================================ */
+.process-list{
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  position:relative;
+}
+.process-list::before{
+  content:"";
+  position:absolute;
+  top: 1.35rem; left: 6%; right:6%;
+  height:1px;
+  background: var(--line);
+}
+.process-item{ position:relative; }
+.process-num{
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent);
+  background: var(--bg);
+  display:inline-block;
+  padding-right: .6rem;
+  margin-bottom: 1.1rem;
+  position:relative; z-index:1;
+}
+.process-item h3{
+  font-size: 1.02rem;
+  font-weight:600;
+  margin-bottom:.6rem;
+}
+.process-item p{
+  font-size:.9rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+#faq .section-head{ text-align:center; display:flex; flex-direction:column; align-items:center; }
+#faq .eyebrow{ justify-content:center; }
+#faq .heading{ max-width: 26ch; }
+
+.faq-list{ max-width: 780px; margin: 0 auto; }
+.faq-q{ text-align:center; justify-content:center; position:relative; padding-left: 2.2rem; padding-right: 2.2rem; }
+.faq-q .icon{ position:absolute; right:0; top:50%; transform:translateY(-50%); }
+.faq-item.is-open .faq-q .icon{ transform: translateY(-50%) rotate(90deg); }
+.faq-panel{ text-align:center; }
+.faq-panel p{ margin: 0 auto; }
+.faq-item{ border-bottom: 1px solid var(--line); }
+.faq-item:first-child{ border-top: 1px solid var(--line); }
+.faq-q{
+  width:100%;
+  background:none; border:none;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem;
+  padding: 1.5rem 0;
+  text-align:left;
+  color: var(--text);
+  font-size:1.02rem;
+  font-weight:500;
+  font-family: var(--font-display);
+}
+.faq-q .icon{
+  flex-shrink:0;
+  width:26px; height:26px;
+  border-radius:50%;
+  border: 1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  transition: border-color .3s ease, transform .4s var(--ease);
+}
+.faq-q .icon::before, .faq-q .icon::after{
+  content:"";
+  position:absolute;
+  background: var(--text-muted);
+  transition: transform .3s ease, background .3s ease;
+}
+.faq-q .icon::before{ width:9px; height:1px; }
+.faq-q .icon::after{ width:1px; height:9px; }
+.faq-item.is-open .faq-q .icon{ border-color: var(--accent); transform: rotate(90deg); }
+.faq-item.is-open .faq-q .icon::after{ transform: scaleY(0); }
+.faq-item.is-open .faq-q .icon::before{ background: var(--accent); }
+
+.faq-panel-wrap{
+  display:grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .45s var(--ease);
+}
+.faq-item.is-open .faq-panel-wrap{ grid-template-rows: 1fr; }
+.faq-panel{ overflow:hidden; }
+.faq-panel p{
+  padding-bottom: 1.6rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+  font-size:.95rem;
+}
+
+/* ============================================================
+   CONTATO
+   ============================================================ */
+#contato .grid{
+  display:grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+.contact-info-list{ margin-top: 2.2rem; display:flex; flex-direction:column; gap:1.3rem; }
+.contact-info-list .label{ font-size:.78rem; color: var(--text-faint); letter-spacing:.06em; text-transform:uppercase; margin-bottom:.3rem; }
+.contact-info-list .value{ font-size:1rem; }
+.contact-info-list a.value:hover{ color: var(--accent); }
+
+form#contact-form{
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  display:flex; flex-direction:column; gap:1.3rem;
+}
+.field{ display:flex; flex-direction:column; gap:.5rem; }
+.field label{ font-size:.82rem; color: var(--text-muted); }
+.field input, .field textarea{
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: .85rem 1rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: .95rem;
+  transition: border-color .3s ease;
+  resize: vertical;
+}
+.field input:focus, .field textarea:focus{ border-color: var(--accent); outline:none; }
+form#contact-form .btn{ margin-top:.4rem; width:100%; }
+.form-note{ font-size:.78rem; color: var(--text-faint); text-align:center; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding: 3rem 0;
+}
+.footer-inner{
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1.2rem;
+}
+.footer-inner p{ font-size:.85rem; color: var(--text-faint); }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 920px){
+  nav.nav-links{
+    position: fixed; inset:0;
+    top:0;
+    background: var(--bg);
+    flex-direction:column;
+    justify-content:center;
+    gap: 2.2rem;
+    transform: translateX(100%);
+    transition: transform .5s var(--ease);
+    z-index: 400;
+  }
+  nav.nav-links.is-open{ transform: translateX(0); }
+  nav.nav-links a{ font-size: 1.3rem; color: var(--text); }
+  .nav-cta .btn-ghost{ display:none; }
+  .nav-toggle{ display:block; z-index:600; }
+
+  #sobre .grid, #contato .grid{ grid-template-columns:1fr; }
+  .portrait-frame{ max-width: 320px; }
+  .compare-wrap{ grid-template-columns:1fr; }
+  .compare-divider{ top:0; left:50%; transform:translate(-50%,-50%); }
+  .process-list{ grid-template-columns: 1fr 1fr; row-gap:2.4rem; }
+  .process-list::before{ display:none; }
+}
+@media (max-width: 560px){
+  .portfolio-item{ flex-basis: min(78vw, 320px); }
+  .process-list{ grid-template-columns: 1fr; }
+  .nav-cta .btn-primary{ padding:.65rem 1.1rem; font-size:.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     INTRO — animação de digitação do nome RVD STUDIO
+     ============================================================ -->
+<div id="intro">
+  <span class="intro-mark">Rvd Studio.</span>
+  <button class="intro-skip" id="intro-skip" aria-label="Pular introdução">Pular introdução →</button>
+
+  <div class="intro-stage">
+    <div class="intro-typing" id="intro-typing"></div>
+  </div>
+
+  <div class="intro-copy" id="intro-copy">
+    <h1>Transformo seu LinkTree em páginas para profissionais que querem transmitir confiança.</h1>
+    <button class="btn btn-primary" id="intro-cta">
+      Conheça meu trabalho
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================
+     NAVBAR LIQUID GLASS
+     ============================================================ -->
+<header id="site-nav">
+  <div class="container nav-inner">
+    <a href="#intro" class="logo">RVD <span>STUDIO</span>.</a>
+
+    <nav class="nav-links" id="nav-links">
+      <a href="#sobre" data-nav>Sobre</a>
+      <a href="#comparativo" data-nav>Comparativo</a>
+      <a href="#portfolio" data-nav>Portfólio</a>
+      <a href="#processo" data-nav>Processo</a>
+      <a href="#faq" data-nav>FAQ</a>
+      <a href="#contato" data-nav>Contato</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#contato" class="btn btn-ghost">Iniciar projeto</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       SOBRE MIM
+       ============================================================ -->
+  <section id="sobre">
+    <div class="container grid">
+      <div class="portrait-frame" data-reveal>
+        <img src="imagens/rivaldo.png" alt="Retrato de Rivaldo">
+      </div>
+
+      <div data-reveal data-reveal-delay="1">
+        <span class="eyebrow">Sobre mim</span>
+        <h2 class="heading">Eu construo a <em>primeira impressão</em> que fecha negócio.</h2>
+        <p class="lede">
+          Sou Rivaldo, Desenvolvo Landing Pages exclusivas. Ajudando profissionais que possuem um LinkTree genérico escondendo seu trabalho atrás de uma lista de botões, eu construo uma página com identidade própria: rápida, responsiva e pensada para transformar visitantes em clientes.
+        </p>
+        <ul class="about-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Design exclusivo, sem templates prontos</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Tudo leve, organizado e otimizado</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Estrutura pensada para gerar conversão, não só visual</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROBLEMA VS SOLUÇÃO
+       ============================================================ -->
+  <section id="comparativo">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">O problema</span>
+        <h2 class="heading">Seu link na bio está te fazendo <em>perder</em> clientes.</h2>
+        <p class="lede">Ferramentas genéricas foram feitas para serem iguais para todo mundo. Sua página deveria ser feita só para você.</p>
+      </div>
+
+      <div class="compare-wrap">
+        <div class="compare-divider" data-reveal>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </div>
+
+        <div class="compare-card problem" data-reveal>
+          <span class="tag">Genérico</span>
+          <div class="mockup">
+            <div class="mockup-bar"><span></span><span></span><span></span></div>
+            <img src="imagens/printlinktree.png" alt="Exemplo de página no LinkTree">
+          </div>
+          <h3>O LinkTree genérico</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Mistura seu conteúdo com anúncios de terceiros</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Mesmo layout usado por milhões de perfis</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Não transmite autoridade nem identidade própria</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>Zero espaço para contar sua história</li>
+          </ul>
+        </div>
+
+        <div class="compare-card solution" data-reveal data-reveal-delay="1">
+          <span class="tag">Exclusivo</span>
+          <div class="mockup">
+            <div class="mockup-bar"><span></span><span></span><span></span></div>
+            <img src="imagens/printlandingpage.png" alt="Exemplo de landing page premium">
+          </div>
+          <h3>A landing page premium</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>100% exclusiva, com sua identidade visual</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Carregamento rápido e sem distrações</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Construída para gerar confiança à primeira vista</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Espaço para provas sociais, serviços e contato direto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA DIRETO
+       ============================================================ -->
+  <section id="cta-direto">
+    <div class="container">
+      <h2 class="heading" data-reveal>Pronto para deixar de ser só mais um link na bio?</h2>
+      <p class="lede" data-reveal data-reveal-delay="1">Leva menos tempo do que parece — e o resultado fica pra sempre no seu domínio, com a sua cara.</p>
+      <a href="#contato" class="btn btn-primary" data-reveal data-reveal-delay="2">
+        Quero minha página premium
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PORTFÓLIO
+       ============================================================ -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Portfólio</span>
+        <h2 class="heading">Páginas construídas para <em>converter</em>, não só para exibir.</h2>
+      </div>
+
+      <div class="portfolio-carousel" data-reveal>
+        <div class="portfolio-track" id="portfolio-track">
+          
+          <!-- Projeto 1 -->
+          <a href="https://pedromoreiranutri.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site1.png" alt="Projeto Rivaldo 01" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Nutricionista Clínico</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+          <!-- Projeto 2 -->
+          <a href="http://academia-linefitness.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site2.png" alt="Projeto Rivaldo 02" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Academia</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+          <!-- Projeto 3 -->
+          <a href="https://draanaangelicarocha.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site3.png" alt="Projeto Rivaldo 03" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Cirurgiã-Dentista</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+          <!-- Projeto 4 -->
+          <a href="https://nutrirebecakeilla.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site4.png" alt="Projeto Rivaldo 04" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Nutricionista Especializada</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+          <!-- Projeto 5 -->
+          <a href="https://fisiosaulomenezes.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site5.png" alt="Projeto Rivaldo 05" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Fisioterapeuta Analítico</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+          <!-- Projeto 6 -->
+          <a href="https://lavateriafast-casacaiada.vercel.app/" target="_blank" rel="noopener" class="portfolio-item">
+            <div class="portfolio-thumb"><img src="imagens/site6.png" alt="Projeto Rivaldo 06" loading="lazy"></div>
+            <div class="portfolio-info"><div><span class="name">Lavanderia</span><span class="role">Visite a Página</span></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+          </a>
+
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="portfolio-prev" aria-label="Projeto anterior">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-btn" id="portfolio-next" aria-label="Próximo projeto">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FLUXO DE TRABALHO
+       ============================================================ -->
+  <section id="processo">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Como funciona</span>
+        <h2 class="heading">Do primeiro contato ao ar, em <em>quatro</em> etapas.</h2>
+      </div>
+
+      <div class="process-list">
+        <div class="process-item" data-reveal>
+          <span class="process-num">01</span>
+          <h3>Diagnóstico</h3>
+          <p>Verifico seu LinkTree que está de forma genérica e o que sua página precisa comunicar.</p>
+        </div>
+        <div class="process-item" data-reveal data-reveal-delay="1">
+          <span class="process-num">02</span>
+          <h3>Processamento</h3>
+          <p>Buscamos referências inspiradas na sua identidade visual, cores e tipografia.</p>
+        </div>
+        <div class="process-item" data-reveal data-reveal-delay="2">
+          <span class="process-num">03</span>
+          <h3>Construção</h3>
+          <p>Desenvolvo a página com animações sofisticadas e performance real.</p>
+        </div>
+        <div class="process-item" data-reveal data-reveal-delay="3">
+          <span class="process-num">04</span>
+          <h3>Lançamento</h3>
+          <p>Sua página ficará publicada e pronta para compartilhar. Caso queria um endereço personalizado (ex.: seunome.com.br), eu ajudo na configuração.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="eyebrow">Perguntas frequentes</span>
+        <h2 class="heading">Ainda com <em>dúvidas</em>?</h2>
+      </div>
+
+      <div class="faq-list" data-reveal>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Quanto tempo leva para ficar pronto?<span class="icon"></span></button>
+          <div class="faq-panel-wrap"><div class="faq-panel"><p>Em média, de 5 a 10 dias úteis, dependendo da complexidade do projeto e da agilidade na troca de conteúdo.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Preciso ter domínio e hospedagem?<span class="icon"></span></button>
+          <div class="faq-panel-wrap"><div class="faq-panel"><p>Eu hospedo sua pagina na Vercel e criamos um domínio gratuito para usar. Se preferir domínio próprio, você faz a compra no registro.br e assim, te ajudo a configurar.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">A página funciona bem no celular?<span class="icon"></span></button>
+          <div class="faq-panel-wrap"><div class="faq-panel"><p>Sim. Todo projeto é construído mobile-first e testado em diferentes tamanhos de tela antes da entrega.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Posso pedir alterações depois de pronto?<span class="icon"></span></button>
+          <div class="faq-panel-wrap"><div class="faq-panel"><p>Sim, ajustes pontuais estão incluídos no pacote inicial durante os 30 dias de garantia. Alterações maiores podem ser orçadas à parte.</p></div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Como funciona o pagamento?<span class="icon"></span></button>
+          <div class="faq-panel-wrap"><div class="faq-panel"><p>Trabalho com um sinal para iniciar o projeto e o restante na entrega. Combinamos tudo antes de começar.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTATO
+       ============================================================ -->
+  <section id="contato">
+    <div class="container grid">
+      <div data-reveal>
+        <span class="eyebrow">Contato</span>
+        <h2 class="heading">Vamos construir <em>sua</em> página.</h2>
+        <p class="lede">Preencha o formulário e o resumo do seu projeto será enviado direto para o meu WhatsApp.</p>
+
+        <div class="contact-info-list">
+          <div>
+            <span class="label">WhatsApp</span>
+            <a class="value" href="#" id="whatsapp-direct-link">(81) 99391-4934</a>
+          </div>
+          <div>
+            <span class="label">E-mail</span>
+            <a class="value" href="mailto:rivaldo@rvdstudio.com.br">rivaldo@rvdstudio.com.br</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="contact-form" data-reveal data-reveal-delay="1">
+        <div class="field">
+          <label for="f-nome">Nome</label>
+          <input type="text" id="f-nome" name="nome" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-profissao">Sua área de atuação</label>
+          <input type="text" id="f-profissao" name="profissao" placeholder="Ex: advogada, consultor, criador de conteúdo" required>
+        </div>
+        <div class="field">
+          <label for="f-mensagem">Conte um pouco sobre o seu projeto</label>
+          <textarea id="f-mensagem" name="mensagem" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          Enviar pelo WhatsApp
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="form-note">Ao enviar, o WhatsApp abre com sua mensagem pronta — é só confirmar.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <p>RVD STUDIO © 2026 — Landing pages para quem não quer ser só mais um link.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  const WHATSAPP_NUMBER = "5581993914934";
+
+  /* ============================================================
+     BLOQUEIA SCROLL ENQUANTO A INTRO ESTIVER ATIVA
+     ============================================================ */
+  document.documentElement.classList.add('lock');
+
+  /* ============================================================
+     INTRO — animação de digitação do nome RVD STUDIO
+     ============================================================ */
+  const introEl = document.getElementById('intro');
+  const introCopy = document.getElementById('intro-copy');
+  const introCta = document.getElementById('intro-cta');
+  const introSkip = document.getElementById('intro-skip');
+  const typingContainer = document.getElementById('intro-typing');
+
+  const textToType = "Rvd Studio.";
+  let charIndex = 0;
+  let typingTimer = null;
+  let finished = false;
+
+  function typeText(){
+    if (finished) return;
+    if (charIndex <= textToType.length){
+      let current = textToType.substring(0, charIndex);
+      let html = "";
+      if (current.length <= 4){
+        html = current;
+      } else {
+        html = current.substring(0, 4) + `<span>${current.substring(4)}</span>`;
+      }
+      typingContainer.innerHTML = html;
+      charIndex++;
+      typingTimer = setTimeout(typeText, 140);
+    } else {
+      typingContainer.classList.add('done');
+      revealIntroCopy();
+    }
+  }
+
+  function revealIntroCopy(){
+    if (finished) return;
+    finished = true;
+    clearTimeout(typingTimer);
+    typingContainer.classList.add('done');
+    introCopy.classList.add('is-visible');
+  }
+
+  setTimeout(typeText, 400);
+
+  function dismissIntro(){
+    document.documentElement.classList.remove('lock');
+    introEl.classList.add('is-hidden');
+  }
+
+  introCta.addEventListener('click', dismissIntro);
+  introSkip.addEventListener('click', () => {
+    finished = true;
+    clearTimeout(typingTimer);
+    typingContainer.innerHTML = "RVD <span>STUDIO</span>";
+    typingContainer.classList.add('done');
+    revealIntroCopy();
+    dismissIntro();
+  });
+
+  /* ============================================================
+     NAVBAR — fundo ao rolar + menu mobile
+     ============================================================ */
+  const siteNav = document.getElementById('site-nav');
+  const navToggle = document.getElementById('nav-toggle');
+  const navLinks = document.getElementById('nav-links');
+
+  window.addEventListener('scroll', () => {
+    siteNav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    navToggle.classList.toggle('is-open', isOpen);
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.querySelectorAll('[data-nav]').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      navToggle.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ============================================================
+     REVEAL ON SCROLL
+     ============================================================ */
+  const revealTargets = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => observer.observe(el));
+
+  /* ============================================================
+     CARROSSEL DE PORTFÓLIO
+     ============================================================ */
+  const track = document.getElementById('portfolio-track');
+  const prevBtn = document.getElementById('portfolio-prev');
+  const nextBtn = document.getElementById('portfolio-next');
+
+  function scrollByCard(direction){
+    const card = track.querySelector('.portfolio-item');
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    track.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: 'smooth' });
+  }
+
+  function updateCarouselButtons(){
+    const max = track.scrollWidth - track.clientWidth - 2;
+    prevBtn.disabled = track.scrollLeft <= 2;
+    nextBtn.disabled = track.scrollLeft >= max;
+  }
+
+  prevBtn.addEventListener('click', () => scrollByCard(-1));
+  nextBtn.addEventListener('click', () => scrollByCard(1));
+  track.addEventListener('scroll', updateCarouselButtons, { passive: true });
+  window.addEventListener('resize', updateCarouselButtons);
+  updateCarouselButtons();
+
+  /* ============================================================
+     FAQ ACCORDION
+     ============================================================ */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.faq-item.is-open').forEach(open => {
+        open.classList.remove('is-open');
+        open.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen){
+        item.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ============================================================
+     FORMULÁRIO -> WHATSAPP
+     ============================================================ */
+  function buildWhatsappLink(nome, profissao, mensagem){
+    const texto =
+      `Olá, Rivaldo! Me chamo ${nome} (${profissao}) e vim pelo seu site.\n\n` +
+      `${mensagem}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(texto)}`;
+  }
+
+  document.getElementById('whatsapp-direct-link').href =
+    `https://wa.me/${WHATSAPP_NUMBER}`;
+
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nome = document.getElementById('f-nome').value.trim();
+    const profissao = document.getElementById('f-profissao').value.trim();
+    const mensagem = document.getElementById('f-mensagem').value.trim();
+    if (!nome || !profissao || !mensagem) return;
+    window.open(buildWhatsappLink(nome, profissao, mensagem), '_blank', 'noopener');
+  });
+
+})();
+</script>
+</body>
+</html>
